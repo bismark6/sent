@@ -21,4 +21,6 @@ jobs:
       - name: sentry-cli
         uses: getsentry/action-release@v3
         with:
+          environment: dev
+          org: sentry-org
           release: 1.2.3
