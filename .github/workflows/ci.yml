@@ -19,9 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Install
-        uses: ./.github/actions/install
-
   prod:
     name: prod
     runs-on: ubuntu-latest
@@ -34,7 +31,4 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v5
-
-      - name: Install
-        uses: ./.github/actions/install
 
