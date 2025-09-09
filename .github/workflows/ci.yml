@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy_alpha:
-    name: alpha
+    name: Deploy - Alpha
     runs-on: ubuntu-latest
     environment:
       name: deployment
@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v5
 
   deploy_prod:
-    name: prod
+    name: Deploy - Production
     runs-on: ubuntu-latest
     environment:
       name: deployment
