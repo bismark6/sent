@@ -1,25 +1,40 @@
-name: Deploy to Amazon ECS
+name: CI/CD
 on:
   push:
     branches:
       - master
-env:
-  AWS_REGION: us-east-3
-  ECS_CLUSTER: app_cluster
-  CONTAINER_NAME: app
-  ECS_SERVICE: app_service
+      - production
 
 jobs:
-  deploy:
-    name: Deploy
+  alpha:
+    name: alpha
     runs-on: ubuntu-latest
-    environment: dev
+    if: github.ref == 'refs/heads/master'
+    strategy:
+      matrix:
+        theme: ['int', 'test 1']
+    permissions:
+      id-token: write
+      contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
-      - name: sentry-cli
-        uses: getsentry/action-release@v3.0.0
-        with:
-          environment: dev
-          release: 1.2.3
+      - name: Install
+        uses: ./.github/actions/install
+
+  prod:
+    name: prod
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/production'
+    strategy:
+      matrix:
+        theme: ['in', 'foo']
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install
+        uses: ./.github/actions/install
+
