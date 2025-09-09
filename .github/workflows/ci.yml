@@ -6,26 +6,32 @@ on:
       - production
 
 jobs:
-  alpha:
+  deploy_alpha:
     name: alpha
     runs-on: ubuntu-latest
+    environment:
+      name: deployment
+      url: https://sourctom/${{ matrix.theme }}/
     if: github.ref == 'refs/heads/master'
     strategy:
       matrix:
-        theme: ['int', 'test 1']
+        theme: ['no', 'yes']
     permissions:
       id-token: write
       contents: read
     steps:
       - uses: actions/checkout@v5
 
-  prod:
+  deploy_prod:
     name: prod
     runs-on: ubuntu-latest
+    environment:
+      name: deployment
+      url: https://sourad-onom/${{ matrix.theme }}/
     if: github.ref == 'refs/heads/production'
     strategy:
       matrix:
-        theme: ['in', 'foo']
+        theme: ['intl', 'vig']
     permissions:
       id-token: write
       contents: read
